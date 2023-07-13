@@ -188,5 +188,4 @@ public class Utility extends ManageBrowser {
         });
         return element;
     }
-
 }

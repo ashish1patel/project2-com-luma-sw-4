@@ -1,65 +1,71 @@
 package com.softwaretestingboard.magento.testsuit;
 
-import com.softwaretestingboard.magento.Pages.GearPage;
+import com.softwaretestingboard.magento.Pages.BagsPage;
+import com.softwaretestingboard.magento.Pages.HomePage;
+import com.softwaretestingboard.magento.Pages.ProductPage;
+import com.softwaretestingboard.magento.Pages.ShoppingCartPage;
 import com.softwaretestingboard.magento.testbase.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class GearTest extends BaseTest {
 
-    GearPage gear = new GearPage();
+    HomePage home = new HomePage();
+    BagsPage bags = new BagsPage();
+    ProductPage product = new ProductPage();
+    ShoppingCartPage shoppingCart = new ShoppingCartPage();
 
     @Test
     public void userShouldAddProductSuccessFullyToShoppingCart() throws InterruptedException {
         // Mouse Hover on Gear Menu
         Thread.sleep(2000);
-        gear.mouseHOverOnGearManu();
+        home.mouseHOverOnGearManu();
 
         // Click on Bags
-        gear.clickOnBags();
+        home.clickOnBags();
 
         //* Click on Product Name ‘Overnight Duffle’
-        gear.clickOnProduct();
+        bags.clickOnProduct();
 
         //* Verify the text ‘Overnight Duffle’
-        String actualProductText = gear.verifyOvernightDuffleText();
+        String actualProductText = product.verifyOvernightDuffleText();
         Assert.assertEquals(actualProductText, "Overnight Duffle", "Product name is Incorrect");
 
         //* Change Qty 3
-        gear.changeQuantity();
+        product.changeQuantity();
 
         //* Click on ‘Add to Cart’ Button.
-        gear.addToCart();
+        product.addToCart();
 
         //* Verify the text ‘You added Overnight Duffle to your shopping cart.’
-        String actualProductAddText = gear.verifyProductAddText();
+        String actualProductAddText = product.verifyProductAddText();
         Assert.assertEquals(actualProductAddText, "You added Overnight Duffle to your shopping cart.", "Product not match");
 
         //* Click on ‘shopping cart’ Link into message
-        gear.clickOnShoppingCart();
+        product.clickOnShoppingCart();
 
         //* Verify the product name ‘Overnight Duffle’
-        String actualProductText1 = gear.verifyTheProductName();
+        String actualProductText1 = shoppingCart.verifyTheProductName();
         Assert.assertEquals(actualProductText, "Overnight Duffle", "Product name is Incorrect");
 
         //* Verify the Qty is ‘3’
         Thread.sleep(3000);
-        String actualProductQty = gear.verifyTheQuantityNumber();
+        String actualProductQty = shoppingCart.verifyTheQuantityNumber();
         Assert.assertEquals(actualProductQty, "3", "Qty is not match");
 
         //* Verify the product price ‘$135.00’
-        String actualProductPrice = gear.verifyTheProductPrice();
+        String actualProductPrice = shoppingCart.verifyTheProductPrice();
         Assert.assertEquals(actualProductPrice, "$135.00", "Price is not match");
 
         //* Change Qty to ‘5’
         Thread.sleep(2000);
-        gear.updateTheQuantity();
+        shoppingCart.updateTheQuantity();
 
         //* Click on ‘Update Shopping Cart’ button
-        gear.clickOnUpdateShoppingCart();
+        shoppingCart.clickOnUpdateShoppingCart();
 
         //* Verify the product price ‘$225.00’
-        String actualProductPrice1 = gear.verifyTheProductPrice1();
+        String actualProductPrice1 = shoppingCart.verifyTheProductPrice1();
         Assert.assertEquals(actualProductPrice1, "$225.00", "Price is not match");
     }
 }
